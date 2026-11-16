@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Підписатися на Telegram канал</title>
+  <meta name="description" content="Короткий шлях до нашого Telegram-каналу">
+  <!-- k2 / telegram lander -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --layer-above: #0f172a;
+      --layer-under: #1e293b;
+      --ink: #e2e8f0;
+      --ink-dim: #64748b;
+      --link-soft: #94a3b8;
+      --link-strong: #e2e8f0;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --layer-above: #f8fafc;
+        --layer-under: #e2e8f0;
+        --ink: #1e293b;
+        --ink-dim: #64748b;
+        --link-soft: #64748b;
+        --link-strong: #0f172a;
+      }
+    }
+
+    html { height: 100%; background-color: var(--layer-under); }
+
+    body {
+      height: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background-image: linear-gradient(180deg, var(--layer-above) 0%, var(--layer-under) 100%);
+    }
+
+    .stage {
+      flex: 1 1 auto;
+      width: 100%;
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .tg-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 22px 48px;
+      border-radius: 60px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      background-image: linear-gradient(180deg, #37aee2 0%, #1e96c8 100%);
+      box-shadow: 0 12px 32px rgba(30, 150, 200, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .tg-cta:hover { box-shadow: 0 16px 40px rgba(30, 150, 200, 0.6); transform: translateY(-2px); }
+    .tg-cta:active { transform: none; }
+    .tg-cta > svg { width: 30px; height: 30px; fill: #fff; flex-shrink: 0; }
+
+    .legal-strip {
+      width: 100%;
+      padding: 28px 16px 36px;
+      font-size: 13px;
+      text-align: center;
+      color: var(--ink-dim);
+    }
+
+    .legal-strip a { margin: 0 8px; color: var(--link-soft); text-decoration: none; white-space: nowrap; }
+    .legal-strip a:hover { color: var(--link-strong); text-decoration: underline; }
+
+    .sep { margin: 0 8px; }
+
+    @media (max-width: 480px) {
+      .tg-cta { gap: 12px; max-width: 100%; padding: 18px 32px; font-size: 19px; }
+      .tg-cta > svg { width: 26px; height: 26px; }
+      .legal-strip { padding: 24px 16px calc(24px + env(safe-area-inset-bottom)); }
+      .legal-strip a { display: block; margin: 8px 0; }
+      .sep { display: none; }
+    }
+  </style>
+
+  <script>
+    // k2: піксель Meta підтягується з ?pixel=, перехід — з паузою
+    (function () {
+      var pxId = new URLSearchParams(window.location.search).get("pixel");
+
+      if (pxId) {
+        !(function (w, d, s, u, m, el, ref) {
+          if (w.fbq) return;
+          m = w.fbq = function () {
+            m.callMethod
+              ? m.callMethod.apply(m, arguments)
+              : m.queue.push(arguments);
+          };
+          if (!w._fbq) w._fbq = m;
+          m.push = m;
+          m.loaded = !0;
+          m.version = "2.0";
+          m.queue = [];
+          el = d.createElement(s);
+          el.async = !0;
+          el.src = u;
+          ref = d.getElementsByTagName(s)[0];
+          ref.parentNode.insertBefore(el, ref);
+        })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+
+        fbq("init", pxId);
+        fbq("track", "PageView");
+      }
+    })();
+
+    // Спочатку подія Lead, потім 300 мс очікування — щоб Meta встигла прийняти
+    function leadThenOpen(dest) {
+      if (!window.fbq) return true; // без пікселя — переходимо без затримки
+      fbq("track", "Lead");
+      setTimeout(function () { window.location.href = dest; }, 300);
+      return false;
+    }
+  </script>
+</head>
+<body>
+  <main class="stage">
+    <a class="tg-cta" href="tg://join?invite=x3WhzX-qnkAzZDli" onclick="return leadThenOpen(this.href)">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 12.86 3.64 11.6c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+      </svg>
+      Перейти в Telegram
+    </a>
+  </main>
+
+  <footer class="legal-strip">
+    <a href="privacy.html">Конфіденційність</a><span class="sep">·</span><a href="cookies.html">Cookies</a><span class="sep">·</span><a href="terms.html">Умови</a>
+  </footer>
+</body>
+</html>
